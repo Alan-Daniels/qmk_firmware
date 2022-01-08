@@ -107,7 +107,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |QWERTY|      |      |      |      |                    |      |      |      |      |      |      |
+ * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------.    ,-------|      |      |RGB ON| HUE+ | SAT+ | VAL+ |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
@@ -151,33 +151,31 @@ const char *read_keylog(void);
 // void set_timelog(void);
 // const char *read_timelog(void);
 
-void render_layer_state(void) {
-    oled_write_P(PSTR("<"), false);
+const char * render_layer_state(void) {
     switch (get_highest_layer(layer_state)) {
         case _QWERTY:
-            oled_write_P(PSTR("QWERTY"), false);
+            return PSTR("< QWERTY >");
             break;
         case _COLMAK:
-            oled_write_P(PSTR("COLMAK"), false);
+            return PSTR("< COLMAK >");
             break;
         case _LOWER:
-            oled_write_P(PSTR("LOWER"), false);
+            return PSTR("< LOWER  >");
             break;
         case _RAISE:
-            oled_write_P(PSTR("RAISE"), false);
+            return PSTR("< RAISE  >");
             break;
         case _ADJUST:
-            oled_write_P(PSTR("ADJUST"), false);
+            return PSTR("< ADJUST >");
             break;
         default:
-            oled_write_P(PSTR("Undefined"), false);
+            return PSTR("Undefined");
     }
-    oled_write_ln_P(PSTR(">"), false);
 }
 
 bool oled_task_user(void) {
     // If you want to change the display of OLED, you need to change here
-    render_layer_state();
+    oled_write_ln_P(render_layer_state(), false);
     oled_write_ln(read_keylog(), false);
     return false;
 }

@@ -29,13 +29,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define TAPPING_FORCE_HOLD
 #define TAPPING_TERM 100
 
-#undef RGBLED_NUM
-#define RGBLIGHT_ANIMATIONS
-#define RGBLED_NUM 27
-#define RGBLIGHT_LIMIT_VAL 120
-#define RGBLIGHT_HUE_STEP 10
-#define RGBLIGHT_SAT_STEP 17
-#define RGBLIGHT_VAL_STEP 17
+// #undef RGBLED_NUM
+// #define RGBLIGHT_ANIMATIONS
+// #define RGBLED_NUM 27
+// #define RGBLIGHT_LIMIT_VAL 120
+// #define RGBLIGHT_HUE_STEP 10
+// #define RGBLIGHT_SAT_STEP 17
+// #define RGBLIGHT_VAL_STEP 17
+
+// OLED setup
+#define IDLE_FRAMES 5
+#define IDLE_SPEED 20
+#define TAP_FRAMES 2
+#define TAP_SPEED 40
+#define ANIM_FRAME_DURATION 200
+#define ANIM_SIZE 512
+// #define OLED_TIMEOUT 300000
+#define OLED_TIMEOUT 0
+
+// #define USE_SERIAL_PD2
 
 // Underglow
 /*
@@ -44,3 +56,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RGBLIGHT_ANIMATIONS
 #define RGBLIGHT_SLEEP
 */
+
+// #define OLED_UPDATE_INTERVAL 16

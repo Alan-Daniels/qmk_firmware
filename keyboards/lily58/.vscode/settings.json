@@ -1,0 +1,6 @@
+{
+	"files.associations": {
+		"build.settings": "lua",
+		"stdio.h": "c"
+	}
+}

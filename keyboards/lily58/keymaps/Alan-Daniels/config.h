@@ -47,6 +47,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define OLED_TIMEOUT 300000
 #define OLED_TIMEOUT 0
 
+// default is 175
+#define AUTO_SHIFT_TIMEOUT 175
+
 // #define USE_SERIAL_PD2
 
 // Underglow

@@ -12,7 +12,7 @@ OLED_ENABLE= yes            # OLED display
 WPM_ENABLE = no
 LTO_ENABLE = yes
 PROGRAMMABLE_BUTTON_ENABLE = no
-AUTO_SHIFT_ENABLE = yes    # Enable auto shift https://github.com/qmk/qmk_firmware/blob/master/docs/feature_auto_shift.md
+AUTO_SHIFT_ENABLE = no    # Enable auto shift https://github.com/qmk/qmk_firmware/blob/master/docs/feature_auto_shift.md
 
 # If you want to change the display of OLED, you need to change here
 # SRC +=  ./lib/rgb_state_reader.c \

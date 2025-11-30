@@ -106,3 +106,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #    define ENABLE_RGB_MATRIX_SOLID_SPLASH
 #    define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
 #endif
+
+// #define AUTO_SHIFT_TIMEOUT 150
+// #define NO_AUTO_SHIFT_TAB
+// #define AUTO_SHIFT_ENTER

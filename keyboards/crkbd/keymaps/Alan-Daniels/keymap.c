@@ -29,7 +29,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case KC_VIBE:
         if (record->event.pressed) {
         } else {
-            SEND_STRING("work back and forth with me, starting with your questions and outline before writing the plan");
+            SEND_STRING("work back and forth with me, starting with your questions and outline before going ahead");
         }
         break;
     }

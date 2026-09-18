@@ -17,12 +17,33 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include QMK_KEYBOARD_H
+#include "raw_hid.h"
 
 enum custom_keycodes {
     KC_VIBE  = SAFE_RANGE,
 };
 
 #define KC_CAD	LALT(LCTL(KC_DEL))
+
+// Mic mute state pushed from the host over raw HID.
+// Report layout: byte 0 = command (0x01 = set mic mute), byte 1 = state (0/1).
+#define RAW_CMD_MIC_MUTE 0x01
+#define RAW_CMD_ECHO     0x02
+#define RAW_REPORT_LEN   32
+
+static bool mic_muted = false;
+
+void raw_hid_receive(uint8_t *data, uint8_t length) {
+    if (length >= 2 && data[0] == RAW_CMD_MIC_MUTE) {
+        mic_muted = data[1] != 0;
+    }
+    if (data[0] == RAW_CMD_ECHO) {
+        uint8_t response[RAW_REPORT_LEN] = {0};
+        response[0] = RAW_CMD_ECHO;
+        response[1] = mic_muted ? 1 : 0;
+        raw_hid_send(response, RAW_REPORT_LEN);
+    }
+}
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -93,6 +114,12 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         uint8_t caps_led = g_led_config.matrix_co[1][6];
         if (caps_led != NO_LED && caps_led >= led_min && caps_led < led_max) {
             rgb_matrix_set_color(caps_led, 255, 0, 0); // solid red on Caps Lock (matrix [1,6])
+        }
+    }
+    if (!mic_muted) {
+        uint8_t mute_led = g_led_config.matrix_co[5][6];
+        if (mute_led != NO_LED && mute_led >= led_min && mute_led < led_max) {
+            rgb_matrix_set_color(mute_led, 255, 0, 0); // solid red on mic mute (matrix [5,6], KC_F20 key)
         }
     }
     return false;
